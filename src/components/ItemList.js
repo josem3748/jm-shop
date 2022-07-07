@@ -3,6 +3,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import ItemCount from "./ItemCount";
 import React from "react";
+import "./styles/ItemList.css";
 
 const estrellas = (qestrellas) => {
   let stars = [];
@@ -26,6 +27,16 @@ function ItemList(props) {
       <h6>{props.description}</h6>
       <div className="d-flex justify-content-between install mt-3">
         <ItemCount initial={props.initial} stock={props.stock} />
+      </div>
+      <div>
+        <button type="button" className="btn btn-primary">
+          Add to cart
+        </button>
+      </div>
+      <div>
+        <button type="button" className="btn btn-secondary">
+          More info
+        </button>
       </div>
     </div>
   );
