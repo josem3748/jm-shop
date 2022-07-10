@@ -6,29 +6,52 @@ import React, { useState } from "react";
 
 function ItemCount(props) {
   let inicial;
+
   props.initial > props.stock
     ? (inicial = props.stock)
     : (inicial = props.initial);
+
   let [qty, setQty] = useState(inicial);
+
   const OnAdd = () => {
     if (qty < props.stock) {
-      return setQty((qty += 1));
+      const aux = qty + 1;
+      setQty(aux);
     }
   };
+
   const OnRemove = () => {
     if (qty >= 2) {
-      return setQty((qty -= 1));
+      const aux = qty - 1;
+      setQty(aux);
     }
   };
+
+  const OnAddToCart = () => {
+    alert(`We added ${qty} units of ${props.name} to the cart.`);
+  };
+
   return (
     <>
-      <button onClick={OnRemove} className="text-primary">
-        <FontAwesomeIcon icon={faArrowLeft} />
-      </button>
-      <span>I want {qty} of these!</span>
-      <button onClick={OnAdd} className="text-primary">
-        <FontAwesomeIcon icon={faArrowRight} />
-      </button>
+      <div className="d-flex justify-content-between install mt-3">
+        <button onClick={OnRemove} className="text-primary">
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+        <span>I want {qty} of these!</span>
+        <button onClick={OnAdd} className="text-primary">
+          <FontAwesomeIcon icon={faArrowRight} />
+        </button>
+      </div>
+      <div>
+        <button onClick={OnAddToCart} type="button" className="btn btn-primary">
+          Add to cart
+        </button>
+      </div>
+      <div>
+        <button type="button" className="btn btn-secondary">
+          More info
+        </button>
+      </div>
     </>
   );
 }

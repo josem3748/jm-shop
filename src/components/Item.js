@@ -1,64 +1,31 @@
-const Items = [
-  {
-    img: "https://i.imgur.com/ccMhxvC.png",
-    name: "Stripe",
-    category: "Payment Services",
-    description:
-      "Get more context on your users with stripe data inside our platform.",
-    stars: 4,
-    initial: 1,
-    stock: 5,
-  },
-  {
-    img: "https://i.imgur.com/IpKQiNu.png",
-    name: "Mailchimp",
-    category: "Project Management",
-    description:
-      "Capture and sync subscribers from your mailchimp platform to ours with ease.",
-    stars: 3,
-    initial: 1,
-    stock: 1,
-  },
-  {
-    img: "https://i.imgur.com/42SqVZd.png",
-    name: "Dropbox",
-    category: "File Management",
-    description:
-      "Use dropbox to sync your photos to our platform and share it with others.",
-    stars: 4,
-    initial: 1,
-    stock: 2,
-  },
-  {
-    img: "https://i.imgur.com/lXEUCY8.png",
-    name: "Shopify",
-    category: "Ecommerce",
-    description:
-      "Sell you items with ease with having any website with our free platform.",
-    stars: 2,
-    initial: 1,
-    stock: 3,
-  },
-  {
-    img: "https://i.imgur.com/S2In5pz.png",
-    name: "Atlassian",
-    category: "Project management",
-    description:
-      "Developing products for developers,project managers and architects.",
-    stars: 5,
-    initial: 1,
-    stock: 4,
-  },
-  {
-    img: "https://i.imgur.com/S5oK3Oe.png",
-    name: "Salesforce",
-    category: "Project management",
-    description:
-      "Developing products for developers,project managers and architects.",
-    stars: 1,
-    initial: 1,
-    stock: 0,
-  },
-];
+import ItemCount from "./ItemCount";
+import React from "react";
+import "./styles/Item.css";
+import StartsRating from "./StartsRating";
 
-export default Items;
+function Item(props) {
+  return (
+    <div className="col-md-4">
+      <div className="card p-3">
+        <div className="d-flex flex-row mb-3">
+          <img className="mx-2" src={props.img} alt={props.name} width="70" />
+          <div className="d-flex flex-column ml-2">
+            <span>{props.name}</span>
+            <span className="text-black-50">{props.category}</span>
+            <span className="ratings">
+              <StartsRating qestrellas={props.stars} />
+            </span>
+          </div>
+        </div>
+        <h6>{props.description}</h6>
+        <ItemCount
+          initial={props.initial}
+          stock={props.stock}
+          name={props.name}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default Item;

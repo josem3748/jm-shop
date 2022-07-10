@@ -1,37 +1,36 @@
 import ItemList from "../components/ItemList";
 import "./styles/ItemListContainer.css";
-import Items from "../components/Item";
 import React, { useState, useEffect } from "react";
-import customFetch from "../components/customFetch";
+import CustomFetch from "../components/CustomFetch";
+import Products from "../data/Products";
 
 const ItemListContainer = (props) => {
-  let [arr, setArr] = useState([]);
+  let [state, setState] = useState(
+    <>
+      <div className="row mt-5 mx-0">
+        <div className="mt-5 d-flex justify-content-center align-items-center">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 
   useEffect(() => {
-    customFetch(2000)
-      .then(() =>
-        setArr(
-          Items.map((item, index) => (
-            <ItemList
-              key={index}
-              img={item.img}
-              name={item.name}
-              category={item.category}
-              description={item.category}
-              stars={item.stars}
-              initial={item.initial}
-              stock={item.stock}
-            />
-          ))
-        )
-      )
+    CustomFetch(2000)
+      .then(() => {
+        const aux = <ItemList products={Products} />;
+        setState(aux);
+      })
       .catch((err) => alert(err));
   }, []);
+
   return (
     <div className="container my-5">
       <div className="row">
         <h1 className="text-center">{props.greeting}</h1>
-        {arr}
+        {state}
       </div>
     </div>
   );
