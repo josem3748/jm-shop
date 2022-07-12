@@ -47,11 +47,6 @@ function ItemCount(props) {
           Add to cart
         </button>
       </div>
-      <div>
-        <button type="button" className="btn btn-secondary">
-          More info
-        </button>
-      </div>
     </>
   );
 }

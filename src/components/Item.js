@@ -23,6 +23,11 @@ function Item(props) {
           stock={props.stock}
           name={props.name}
         />
+        <div>
+          <button type="button" className="btn btn-secondary">
+            More info
+          </button>
+        </div>
       </div>
     </div>
   );

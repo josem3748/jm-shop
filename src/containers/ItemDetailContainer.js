@@ -1,10 +1,10 @@
-import ItemList from "../components/ItemList";
+import ItemDetail from "../components/ItemDetail";
 import "./styles/ItemListContainer.css";
 import React, { useState, useEffect } from "react";
 import CustomFetch from "../components/CustomFetch";
 import Products from "../data/Products";
 
-const ItemListContainer = (props) => {
+const ItemDetailContainer = (props) => {
   let [state, setState] = useState(
     <>
       <div className="row mt-5 mx-0">
@@ -20,7 +20,7 @@ const ItemListContainer = (props) => {
   useEffect(() => {
     CustomFetch(2000)
       .then(() => {
-        const aux = <ItemList products={Products} />;
+        const aux = <ItemDetail products={Products[0]} />;
         setState(aux);
       })
       .catch((err) => alert(err));
@@ -28,12 +28,9 @@ const ItemListContainer = (props) => {
 
   return (
     <div className="container my-5">
-      <div className="row d-flex justify-content-center">
-        <h1 className="text-center">{props.greeting}</h1>
-        {state}
-      </div>
+      <div className="row d-flex justify-content-center">{state}</div>
     </div>
   );
 };
 
-export default ItemListContainer;
+export default ItemDetailContainer;
