@@ -1,11 +1,13 @@
 import Item from "../components/Item";
+import "./styles/ItemList.css";
 
 const ItemList = (props) => {
   return (
     <>
-      {props.products.map((item, index) => (
+      {props.products.map((item) => (
         <Item
-          key={index}
+          key={item.id}
+          id={item.id}
           img={item.img}
           name={item.name}
           category={item.category}

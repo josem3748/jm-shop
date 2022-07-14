@@ -5,7 +5,7 @@ import StartsRating from "./StartsRating";
 
 function ItemDetail(props) {
   return (
-    <div className="col-md-4">
+    <div className="col-md-8">
       <div className="card p-3">
         <div className="d-flex flex-row mb-3">
           <img
@@ -23,6 +23,7 @@ function ItemDetail(props) {
           </div>
         </div>
         <h6>{props.products.description}</h6>
+        <p>{props.products.longDescription}</p>
         <ItemCount
           initial={props.products.initial}
           stock={props.products.stock}

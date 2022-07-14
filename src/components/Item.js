@@ -2,6 +2,7 @@ import ItemCount from "./ItemCount";
 import React from "react";
 import "./styles/Item.css";
 import StartsRating from "./StartsRating";
+import { Link } from "react-router-dom";
 
 function Item(props) {
   return (
@@ -25,7 +26,7 @@ function Item(props) {
         />
         <div>
           <button type="button" className="btn btn-secondary">
-            More info
+            <Link to={"/item/" + props.id}>More info</Link>
           </button>
         </div>
       </div>
