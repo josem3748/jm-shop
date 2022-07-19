@@ -1,4 +1,3 @@
-import ItemCount from "./ItemCount";
 import React from "react";
 import "./styles/Item.css";
 import StartsRating from "./StartsRating";
@@ -19,11 +18,6 @@ function Item(props) {
           </div>
         </div>
         <h6>{props.description}</h6>
-        <ItemCount
-          initial={props.initial}
-          stock={props.stock}
-          name={props.name}
-        />
         <div>
           <button type="button" className="btn btn-secondary">
             <Link to={"/item/" + props.id}>More info</Link>

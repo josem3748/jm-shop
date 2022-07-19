@@ -27,10 +27,6 @@ function ItemCount(props) {
     }
   };
 
-  const OnAddToCart = () => {
-    alert(`We added ${qty} units of ${props.name} to the cart.`);
-  };
-
   return (
     <>
       <div className="d-flex justify-content-between install mt-3">
@@ -43,7 +39,11 @@ function ItemCount(props) {
         </button>
       </div>
       <div>
-        <button onClick={OnAddToCart} type="button" className="btn btn-primary">
+        <button
+          onClick={() => props.OnAddToCart(qty, props.name)}
+          type="button"
+          className="btn btn-primary"
+        >
           Add to cart
         </button>
       </div>
