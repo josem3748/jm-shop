@@ -7,7 +7,7 @@ function Item(props) {
   return (
     <div className="col-md-4">
       <div className="card p-3">
-        <div className="d-flex flex-row mb-3">
+        <div className="d-flex justify-content-start flex-row mb-3">
           <img className="mx-2" src={props.img} alt={props.name} width="70" />
           <div className="d-flex flex-column ml-2">
             <span>{props.name}</span>
@@ -17,7 +17,10 @@ function Item(props) {
             </span>
           </div>
         </div>
-        <h6>{props.description}</h6>
+        <div className="d-flex justify-content-between mx-3">
+          <h6>{props.description}</h6>
+          <h6>${props.price}</h6>
+        </div>
         <div>
           <button type="button" className="btn btn-secondary">
             <Link to={"/item/" + props.id}>More info</Link>

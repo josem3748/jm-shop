@@ -13,6 +13,7 @@ const ItemList = (props) => {
           category={item.category}
           description={item.category}
           stars={item.stars}
+          price={item.price}
         />
       ))}
     </>

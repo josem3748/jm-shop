@@ -12,6 +12,7 @@ const Products = [
     stars: 4,
     initial: 1,
     stock: 5,
+    price: 10,
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ const Products = [
     stars: 3,
     initial: 1,
     stock: 1,
+    price: 10,
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ const Products = [
     stars: 4,
     initial: 1,
     stock: 2,
+    price: 10,
   },
   {
     id: 4,
@@ -54,6 +57,7 @@ const Products = [
     stars: 2,
     initial: 1,
     stock: 3,
+    price: 20,
   },
   {
     id: 5,
@@ -68,6 +72,7 @@ const Products = [
     stars: 5,
     initial: 1,
     stock: 4,
+    price: 20,
   },
   {
     id: 6,
@@ -82,6 +87,7 @@ const Products = [
     stars: 1,
     initial: 1,
     stock: 0,
+    price: 20,
   },
 ];
 

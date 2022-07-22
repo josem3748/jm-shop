@@ -21,7 +21,7 @@ const ItemDetailContainer = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    CustomFetch(2000)
+    CustomFetch(1000)
       .then(() => {
         const aux = (
           <ItemDetail

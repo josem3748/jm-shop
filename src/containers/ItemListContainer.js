@@ -29,7 +29,7 @@ const ItemListContainer = () => {
         })
         .catch((err) => alert(err));
     } else {
-      CustomFetch(2000)
+      CustomFetch(1000)
         .then(() => {
           const aux = (
             <ItemList

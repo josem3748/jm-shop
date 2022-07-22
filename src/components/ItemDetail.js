@@ -1,16 +1,21 @@
 import ItemCount from "./ItemCount";
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "./CartContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./styles/Item.css";
 import StartsRating from "./StartsRating";
 
-function ItemDetail(props) {
+const ItemDetail = (props) => {
+  const carrito = useContext(CartContext);
   let [qty, setQty] = useState(0);
 
   const OnAddToCart = (cantidad, name) => {
     alert(`We added ${cantidad} units of ${name} to the cart.`);
     setQty((qty = cantidad));
+    let item = { ...props };
+    item.products.qty = cantidad;
+    carrito.addToCart(item);
   };
 
   return (
@@ -33,6 +38,7 @@ function ItemDetail(props) {
         </div>
         <h6>{props.products.description}</h6>
         <p>{props.products.longDescription}</p>
+        <span className="text-center lead">${props.products.price}</span>
         {{ qty }.qty === 0 ? (
           <ItemCount
             initial={props.products.initial}
@@ -50,6 +56,6 @@ function ItemDetail(props) {
       </div>
     </div>
   );
-}
+};
 
 export default ItemDetail;
