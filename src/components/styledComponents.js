@@ -84,11 +84,10 @@ const Button = styled.a`
   background: gray;
   border-radius: 5px;
   height: 40px;
-  margin: auto 0 auto auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  float: right;
   width: 25%;
   text-align: center;
 `}

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "./CartContext";
+import { Link } from "react-router-dom";
 import {
   WrapperCart,
   TitleCart,
@@ -23,7 +24,7 @@ const Cart = () => {
     carrito.removeFromCart(index);
   };
 
-  const OnRemoveAll = (index, cantidad, name) => {
+  const OnRemoveAll = () => {
     alert(`All products were removed from the cart.`);
     carrito.removeAll();
   };
@@ -34,9 +35,14 @@ const Cart = () => {
       <WrapperCart>
         <TitleCart>CART</TitleCart>
         {carrito.cartList.length > 0 && (
-          <Button href="#" onClick={OnRemoveAll}>
-            Remove All
-          </Button>
+          <>
+            <Link className="btn btn-primary w-25 m-0" to={"/"}>
+              Buy something
+            </Link>
+            <Button href="#" onClick={OnRemoveAll}>
+              Remove all
+            </Button>
+          </>
         )}
         <ContentCart>
           {carrito.cartList.length > 0 ? (
@@ -72,7 +78,12 @@ const Cart = () => {
               </Product>
             ))
           ) : (
-            <span className="text-center">Your cart is empty</span>
+            <>
+              <span className="text-center">Your cart is empty</span>
+              <Link className="btn btn-primary w-25 mx-auto" to={"/"}>
+                Buy something
+              </Link>
+            </>
           )}
         </ContentCart>
       </WrapperCart>
