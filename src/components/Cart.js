@@ -114,6 +114,10 @@ const Cart = () => {
                   <ProductPrice>$ {total} total</ProductPrice>
                 </PriceDetail>
               </Product>
+              <Line />
+              <Link className="btn btn-success" to={"#"}>
+                Payment
+              </Link>
             </>
           ) : (
             <>
