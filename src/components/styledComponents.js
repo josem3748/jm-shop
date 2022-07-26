@@ -93,6 +93,10 @@ const Button = styled.a`
 `}
 `;
 
+const Line = styled.hr`
+  color: rgba(0, 0, 0, 0.65);
+`;
+
 export {
   WrapperCart,
   TitleCart,
@@ -106,4 +110,5 @@ export {
   ProductAmountContainer,
   ProductAmount,
   Button,
+  Line,
 };

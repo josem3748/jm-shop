@@ -14,6 +14,7 @@ import {
   ProductAmount,
   ProductPrice,
   Button,
+  Line,
 } from "./styledComponents";
 
 const Cart = () => {
@@ -28,6 +29,21 @@ const Cart = () => {
     alert(`All products were removed from the cart.`);
     carrito.removeAll();
   };
+
+  let qtySubtotal = 0;
+  let subtotal = 0;
+
+  carrito.cartList.forEach((element) => {
+    qtySubtotal += element.products.qty;
+    subtotal += element.products.qty * element.products.price;
+  });
+
+  let discount = 0.1;
+  let taxes = 0.21;
+
+  let discountTotal = Math.round(subtotal * discount);
+  let taxesTotal = Math.round(subtotal * (1 - discount) * taxes);
+  let total = subtotal - discountTotal + taxesTotal;
 
   console.log(carrito.cartList);
   return (
@@ -46,37 +62,59 @@ const Cart = () => {
         )}
         <ContentCart>
           {carrito.cartList.length > 0 ? (
-            carrito.cartList.map((item, index) => (
-              <Product key={index}>
+            <>
+              {carrito.cartList.map((item, index) => (
+                <Product key={index}>
+                  <ProductDetail>
+                    <ImageCart src={item.products.img} />
+                    <Details>
+                      <span>
+                        <b>Product:</b> {item.products.name}
+                      </span>
+                    </Details>
+                    <Button
+                      href="#"
+                      onClick={() =>
+                        OnRemoveFromCart(
+                          item.products.id,
+                          item.products.qty,
+                          item.products.name
+                        )
+                      }
+                      primary
+                    >
+                      Remove
+                    </Button>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <ProductAmount>{item.products.qty} items</ProductAmount>
+                    </ProductAmountContainer>
+                    <ProductPrice>$ {item.products.price} each</ProductPrice>
+                  </PriceDetail>
+                </Product>
+              ))}
+              <Line />
+              <Product>
                 <ProductDetail>
-                  <ImageCart src={item.products.img} />
                   <Details>
                     <span>
-                      <b>Product:</b> {item.products.name}
+                      <b>SUMMARY:</b>
                     </span>
                   </Details>
-                  <Button
-                    href="#"
-                    onClick={() =>
-                      OnRemoveFromCart(
-                        item.products.id,
-                        item.products.qty,
-                        item.products.name
-                      )
-                    }
-                    primary
-                  >
-                    Remove
-                  </Button>
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <ProductAmount>{item.products.qty} items</ProductAmount>
+                    <ProductAmount>{qtySubtotal} items</ProductAmount>
                   </ProductAmountContainer>
-                  <ProductPrice>$ {item.products.price} each</ProductPrice>
+                  <ProductPrice>$ {subtotal} subtotal</ProductPrice>
+                  <ProductPrice>($ {discountTotal} discount)</ProductPrice>
+                  <ProductPrice>$ {taxesTotal} taxes</ProductPrice>
+                  <ProductPrice>---------------------</ProductPrice>
+                  <ProductPrice>$ {total} total</ProductPrice>
                 </PriceDetail>
               </Product>
-            ))
+            </>
           ) : (
             <>
               <span className="text-center">Your cart is empty</span>
