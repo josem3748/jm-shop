@@ -1,9 +1,9 @@
 import ItemList from "../components/ItemList";
 import "./styles/ItemListContainer.css";
 import React, { useState, useEffect } from "react";
-import CustomFetch from "../components/CustomFetch";
-import Products from "../data/Products";
 import { useParams } from "react-router-dom";
+import { db } from "../utils/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const [state, setState] = useState(
@@ -21,33 +21,35 @@ const ItemListContainer = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id === undefined) {
-      CustomFetch(2000)
-        .then(() => {
-          const aux = <ItemList products={Products} />;
-          setState(aux);
-        })
-        .catch((err) => alert(err));
-    } else {
-      CustomFetch(1000)
-        .then(() => {
-          const aux = (
-            <ItemList
-              products={Products.filter(
-                (item) => item.categoryId === parseInt(id)
-              )}
-            />
-          );
-          setState(aux);
-        })
-        .catch((err) => alert(err));
-    }
+    const firestoreFecth = async () => {
+      const querySnapshot = await getDocs(collection(db, "products"));
+      const dataFromFirestore = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      return dataFromFirestore;
+    };
+    firestoreFecth()
+      .then((res) => {
+        let aux;
+        id === undefined
+          ? (aux = <ItemList products={res} />)
+          : (aux = (
+              <ItemList
+                products={res.filter(
+                  (item) => item.categoryId === parseInt(id)
+                )}
+              />
+            ));
+        setState(aux);
+      })
+      .catch((err) => alert(err));
   }, [id]);
 
   return (
     <div className="container my-5">
       <div className="row d-flex justify-content-center">
-        <h1 className="text-center">Hola mundo!!!</h1>
+        <h1 className="text-center">Welcome!!!</h1>
         {state}
       </div>
     </div>

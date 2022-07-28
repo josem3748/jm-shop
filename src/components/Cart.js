@@ -45,7 +45,7 @@ const Cart = () => {
   let taxesTotal = Math.round(subtotal * (1 - discount) * taxes);
   let total = subtotal - discountTotal + taxesTotal;
 
-  console.log(carrito.cartList);
+  //console.log(carrito.cartList);
   return (
     <>
       <WrapperCart>

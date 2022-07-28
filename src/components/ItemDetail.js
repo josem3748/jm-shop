@@ -48,6 +48,9 @@ const ItemDetail = (props) => {
           />
         ) : (
           <div>
+            <button type="button" className="btn btn-primary">
+              <Link to={"/"}>Buy more stuff</Link>
+            </button>
             <button type="button" className="btn btn-secondary">
               <Link to={"/cart"}>Checkout</Link>
             </button>
