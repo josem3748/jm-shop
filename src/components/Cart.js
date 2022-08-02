@@ -1,6 +1,15 @@
 import React, { useContext } from "react";
+import {
+  collection,
+  serverTimestamp,
+  doc,
+  setDoc,
+  updateDoc,
+  increment,
+} from "firebase/firestore";
 import { CartContext } from "./CartContext";
 import { Link } from "react-router-dom";
+import { db } from "../utils/firebaseConfig";
 import {
   WrapperCart,
   TitleCart,
@@ -45,7 +54,44 @@ const Cart = () => {
   let taxesTotal = Math.round(subtotal * (1 - discount) * taxes);
   let total = subtotal - discountTotal + taxesTotal;
 
-  //console.log(carrito.cartList);
+  const createOrder = () => {
+    let itemsForDB = carrito.cartList.map((item) => ({
+      id: item.products.id,
+      title: item.products.name,
+      price: item.products.price,
+      qty: item.products.qty,
+    }));
+    let order = {
+      buyer: {
+        email: "leo@messi.com",
+        name: "Leo Messi",
+        phone: "9273489342",
+      },
+      date: serverTimestamp(),
+      items: itemsForDB,
+      total: { total },
+    };
+
+    const createOrderInFirestore = async () => {
+      const newOrderRef = doc(collection(db, "orders"));
+      await setDoc(newOrderRef, order);
+      return newOrderRef;
+    };
+
+    createOrderInFirestore()
+      .then((res) => alert("Your order id is " + res.id))
+      .catch((err) => alert(err));
+
+    carrito.cartList.forEach(async (item) => {
+      const itemRef = doc(db, "products", item.products.id);
+      await updateDoc(itemRef, {
+        stock: increment(-item.products.qty),
+      });
+    });
+
+    carrito.removeAll();
+  };
+
   return (
     <>
       <WrapperCart>
@@ -55,7 +101,11 @@ const Cart = () => {
             <Link className="btn btn-primary w-25 m-0" to={"/"}>
               Buy something
             </Link>
-            <Button href="#" onClick={OnRemoveAll}>
+            <Button
+              className="btn btn-danger m-0"
+              href="#"
+              onClick={OnRemoveAll}
+            >
               Remove all
             </Button>
           </>
@@ -115,9 +165,9 @@ const Cart = () => {
                 </PriceDetail>
               </Product>
               <Line />
-              <Link className="btn btn-success" to={"#"}>
+              <Button onClick={createOrder} className="btn btn-success w-100">
                 Payment
-              </Link>
+              </Button>
             </>
           ) : (
             <>

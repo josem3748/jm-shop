@@ -81,7 +81,6 @@ const Button = styled.a`
       justify-content: space-around;
     `
       : `
-  background: gray;
   border-radius: 5px;
   height: 40px;
   display: inline-flex;
