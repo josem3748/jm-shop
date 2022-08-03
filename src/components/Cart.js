@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import swal from "sweetalert";
 import {
   collection,
   serverTimestamp,
@@ -30,12 +31,12 @@ const Cart = () => {
   const carrito = useContext(CartContext);
 
   const OnRemoveFromCart = (index, cantidad, name) => {
-    alert(`We removed ${cantidad} units of ${name} from the cart.`);
+    swal(`We removed ${cantidad} units of ${name} from the cart.`);
     carrito.removeFromCart(index);
   };
 
   const OnRemoveAll = () => {
-    alert(`All products were removed from the cart.`);
+    swal(`All products were removed from the cart.`);
     carrito.removeAll();
   };
 
@@ -61,11 +62,21 @@ const Cart = () => {
       price: item.products.price,
       qty: item.products.qty,
     }));
+
+    let inputname = document.getElementById("inputname").value;
+    let inputemail = document.getElementById("inputemail").value;
+    let inputphone = document.getElementById("inputphone").value;
+
+    if (!inputname || !inputemail || !inputphone) {
+      swal("Please complete all fields");
+      return;
+    }
+
     let order = {
       buyer: {
-        email: "leo@messi.com",
-        name: "Leo Messi",
-        phone: "9273489342",
+        email: inputname,
+        name: inputemail,
+        phone: inputphone,
       },
       date: serverTimestamp(),
       items: itemsForDB,
@@ -79,8 +90,8 @@ const Cart = () => {
     };
 
     createOrderInFirestore()
-      .then((res) => alert("Your order id is " + res.id))
-      .catch((err) => alert(err));
+      .then((res) => swal("Your order id is " + res.id))
+      .catch((err) => swal(err));
 
     carrito.cartList.forEach(async (item) => {
       const itemRef = doc(db, "products", item.products.id);
@@ -165,6 +176,30 @@ const Cart = () => {
                 </PriceDetail>
               </Product>
               <Line />
+              <input
+                placeholder="Name"
+                className="w-100 text-center m-auto"
+                type="text"
+                id="inputname"
+              />
+
+              <br />
+              <input
+                placeholder="Email"
+                className="w-100 text-center m-auto"
+                type="text"
+                id="inputemail"
+              />
+
+              <br />
+              <input
+                placeholder="Phone"
+                className="w-100 text-center m-auto"
+                type="number"
+                id="inputphone"
+              />
+
+              <br />
               <Button onClick={createOrder} className="btn btn-success w-100">
                 Payment
               </Button>

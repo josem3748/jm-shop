@@ -1,5 +1,6 @@
 import ItemList from "../components/ItemList";
 import "./styles/ItemListContainer.css";
+import swal from "sweetalert";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebaseConfig";
@@ -43,7 +44,7 @@ const ItemListContainer = () => {
             ));
         setState(aux);
       })
-      .catch((err) => alert(err));
+      .catch((err) => swal(err));
   }, [id]);
 
   return (

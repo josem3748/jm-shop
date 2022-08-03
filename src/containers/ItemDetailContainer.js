@@ -1,5 +1,6 @@
 import ItemDetail from "../components/ItemDetail";
 import "./styles/ItemListContainer.css";
+import swal from "sweetalert";
 import React, { useState, useEffect } from "react";
 import { db } from "../utils/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
@@ -41,7 +42,7 @@ const ItemDetailContainer = () => {
         const aux = <ItemDetail products={res} />;
         setState(aux);
       })
-      .catch((err) => alert(err));
+      .catch((err) => swal(err));
   }, [id]);
 
   return (

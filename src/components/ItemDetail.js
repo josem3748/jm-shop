@@ -1,5 +1,6 @@
 import ItemCount from "./ItemCount";
 import React, { useContext } from "react";
+import swal from "sweetalert";
 import { CartContext } from "./CartContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -11,7 +12,7 @@ const ItemDetail = (props) => {
   let [qty, setQty] = useState(0);
 
   const OnAddToCart = (cantidad, name) => {
-    alert(`We added ${cantidad} units of ${name} to the cart.`);
+    swal(`We added ${cantidad} units of ${name} to the cart.`);
     setQty((qty = cantidad));
     let item = { ...props };
     item.products.qty = cantidad;
