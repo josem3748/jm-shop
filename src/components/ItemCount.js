@@ -11,7 +11,7 @@ function ItemCount(props) {
     ? (inicial = props.stock)
     : (inicial = props.initial);
 
-  let [qty, setQty] = useState(inicial);
+  const [qty, setQty] = useState(inicial);
 
   const OnAdd = () => {
     if (qty < props.stock) {

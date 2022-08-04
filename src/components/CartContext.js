@@ -7,7 +7,7 @@ const CartContextProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
 
   const addToCart = (item) => {
-    let alreadyAddedProduct = cartList.findIndex(
+    const alreadyAddedProduct = cartList.findIndex(
       (x) => x.products.id === item.products.id
     );
     alreadyAddedProduct >= 0
@@ -16,8 +16,8 @@ const CartContextProvider = ({ children }) => {
   };
 
   const removeFromCart = (item) => {
-    let productToRemove = cartList.find((x) => x.products.id === item);
-    let arr = [...cartList];
+    const productToRemove = cartList.find((x) => x.products.id === item);
+    const arr = [...cartList];
     setCartList(
       arr.filter((x) => x.products.id !== productToRemove.products.id)
     );

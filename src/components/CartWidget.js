@@ -11,8 +11,6 @@ const CartWidget = () => {
 
   let burbuja = 0;
 
-  console.log(carrito);
-
   carrito.cartList.forEach((element) => {
     burbuja += element.products.qty;
   });

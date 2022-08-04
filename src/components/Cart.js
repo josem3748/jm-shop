@@ -51,28 +51,26 @@ const Cart = () => {
   let discount = 0.1;
   let taxes = 0.21;
 
-  let discountTotal = Math.round(subtotal * discount);
-  let taxesTotal = Math.round(subtotal * (1 - discount) * taxes);
-  let total = subtotal - discountTotal + taxesTotal;
+  const discountTotal = Math.round(subtotal * discount);
+  const taxesTotal = Math.round(subtotal * (1 - discount) * taxes);
+  const total = subtotal - discountTotal + taxesTotal;
 
   const createOrder = () => {
-    let itemsForDB = carrito.cartList.map((item) => ({
+    const itemsForDB = carrito.cartList.map((item) => ({
       id: item.products.id,
       title: item.products.name,
       price: item.products.price,
       qty: item.products.qty,
     }));
 
-    let inputname = document.getElementById("inputname").value;
-    let inputemail = document.getElementById("inputemail").value;
-    let inputphone = document.getElementById("inputphone").value;
+    const inputname = document.getElementById("inputname").value;
+    const inputemail = document.getElementById("inputemail").value;
+    const inputphone = document.getElementById("inputphone").value;
 
-    if (!inputname || !inputemail || !inputphone) {
-      swal("Please complete all fields");
-      return;
-    }
+    if (!inputname || !inputemail || !inputphone)
+      return swal("Please complete all the fields");
 
-    let order = {
+    const order = {
       buyer: {
         email: inputname,
         name: inputemail,

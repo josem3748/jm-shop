@@ -14,7 +14,7 @@ const ItemDetail = (props) => {
   const OnAddToCart = (cantidad, name) => {
     swal(`We added ${cantidad} units of ${name} to the cart.`);
     setQty((qty = cantidad));
-    let item = { ...props };
+    const item = { ...props };
     item.products.qty = cantidad;
     carrito.addToCart(item);
   };
